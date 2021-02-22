@@ -1,90 +1,110 @@
-<!DOCTYPE html>
 <html>
-<head>
- <title></title>
- <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
-<style >
- body{
-  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.pexels.com/photos/1028725/pexels-photo-1028725.jpeg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 100%;
-  height: 100vh;
-  position: relative;
- }
- header{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
- }
-</style>
-</head>
-<body>
 
-<header >
- 
-<div class="card w-50 m-auto text-center ">
-  <div class="card-header bg-danger text-white">LOVE CALCULATOR</div>
-  <div class="card-body">
-   <form class="form-inline w-75 m-auto">
-    <div class="form-group">
-     <input type="text" name="" class="form-control text-center" placeholder="Your Name" id="name" >
-    </div>
-    <div class="pl-4 pr-4">
-     <span> + </span>
-    </div>
-    <div class="form-group">
-     <input type="text" name="" class="form-control text-center" placeholder=" Love Name" id="lname">
-    </div>
-   </form> <br>
-    <div class="w-70 m-auto">
-     <button  class="btn btn-success w-50" onclick="checkloveper()"> click </button>
-    </div>
-    <br>
-    <div>
-     <input type="text" name="" placeholder="LOVE PERCENTAGE" class="form-control text-center w-25 m-auto" id="lovevalue">
-    </div>
-  </div> 
-  <div class="card-footer ">God Bless Your RelationShip Bipul! 
-   Bipul Gyawali is a beautiful handsome man ! he is a great man with true feeling of love towards his crush. </div>
+<Head>
+<Title>love calculator</title>
+<Style>
+
+
+
+
+.calc {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	padding:20px 50px;
+	border:5px solid #AB6C6C;
+	background-color: #BB9898;
+	clear: both;
+}
+#result {
+	color: rgb(202, 58, 58);
+  font-size: 85px;
+  text-shadow: 1px 1px 1px #646161;
+	height: 150px;
+}
+
+</Head>
+<Script>
+function love(array) {
+		var hold = [],
+				result,
+				newArray;
+		if (array.length > 2) {
+				newArray = array.map(function(item, index, array) {
+						return item + array[index + 1];
+				});
+				newArray.forEach(function(item) {
+						if (typeof item === "number" && !isNaN(item)) {
+								if (item < 10) {
+										hold.push(item);
+								} else if (item > 9) {
+										console.log('Splitting' + item + " into " + item.toString()[0] + " and " + item.toString()[1]);
+										hold.push(parseInt(item.toString()[0]));
+										hold.push(parseInt(item.toString()[1]));
+								}
+						} else {
+								console.log("failed number check: " + item);
+						}
+				});
+				love(hold);
+		} else {
+				document.getElementById('result').textContent = array[0] + "" + array[1] + "%";
+				result = array[0] + "" + array[1] + "%";
+				return result;
+		}
+}
+
+function calculate() {
+		var inputs = document.getElementsByName('names'),
+				loves = ["l", "o", "v", "e", "s"],
+				countArray = [],
+				count,
+				names,
+				jointNames;
+		document.getElementById('warning').textContent = "";
+		if (!inputs[0].value || !inputs[1].value) {
+				document.getElementById('warning').textContent = "Please enter both names.";
+		} else {
+				names = "" + inputs[0].value + "" + inputs[1].value + "";
+				jointNames = names.toLowerCase();
+				countArray = loves.map(function(item) {
+						count = 0;
+						for (var i = 0; i < jointNames.length; i += 1) {
+								if (item === jointNames[i]) {
+										count += 1;
+								}
+						}
+						return count;
+				});
+				love(countArray);
+		}
+}
+
+document.getElementById('submit').addEventListener('click', function(e) {
+		e.preventDefault();
+		calculate();
+}, false);
+</Script>
+<div class="container">
+	<div class=" clearfix">
+		<div class="calc col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+				<h2>Love Calculator</h2>
+				<h5>Input two peoples names to calculate the love....</h5>
+				<form role="form" class="form-horizontal">
+						<div class="form-group">
+								<input type="text" class="form-control" name="names" placeholder="Name One" />
+						</div>
+						<div class="form-group">
+								<input type="text" class="form-control" name="names" placeholder="Name Two" />
+						</div>
+						<div class="form-group">
+								<button class="btn btn-danger pull-right" type="submit" id="submit">Calculate</button>
+						</div>
+				</form>
+				<p id="warning" class="text-danger"></p>
+				<h1 id="result" class="text-center"></h1>
+		</div>
+	</div>
 </div>
 
-</header>
-
-<script>
- function checkloveper(){
-
-  var name = document.getElementById('name').value;
-  var lname = document.getElementById('lname').value;
-
-  if(name == ""){
-   alert('Please enter your name');
-  }else if (name.length <=2 ) {
-   alert('Min lenght is 3')
-  }else if(!isNaN(name)){
-   alert('Numbers are not allowed');
-  }
-
-  else if(lname == ""){
-   alert('Please enter your love name');
-  }else if (lname.length <=2 ) {
-   alert('Min lenght is 3')
-  }else if(!isNaN(lname)){
-   alert('Numbers are not allowed');
-  }
-  else{
-  var lovdata = Math.random() * 100;
-  lovdata = Math.floor(lovdata);
-  document.getElementById('lovevalue').value = lovdata + "%"; 
-  }
-  
- }
-</script>
-</body>
-
-</html>
+</Html>
