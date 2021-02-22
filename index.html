@@ -1,110 +1,169 @@
+<!doctype html>
 <html>
+<head>
+	<title>lop u waifu</title>
 
+	<h1 align="center">Hi! I am Handsome Bipul.</h1>
 
-<Head>
-<Title>love calculator</title>
-<Style>
-
-
-
-
-.calc {
-	margin-top: 50px;
-	margin-bottom: 50px;
-	padding:20px 50px;
-	border:5px solid #AB6C6C;
-	background-color: #BB9898;
-	clear: both;
-}
-#result {
-	color: rgb(202, 58, 58);
-  font-size: 85px;
-  text-shadow: 1px 1px 1px #646161;
-	height: 150px;
-}
-
-</Head>
-<Script>
-function love(array) {
-		var hold = [],
-				result,
-				newArray;
-		if (array.length > 2) {
-				newArray = array.map(function(item, index, array) {
-						return item + array[index + 1];
-				});
-				newArray.forEach(function(item) {
-						if (typeof item === "number" && !isNaN(item)) {
-								if (item < 10) {
-										hold.push(item);
-								} else if (item > 9) {
-										console.log('Splitting' + item + " into " + item.toString()[0] + " and " + item.toString()[1]);
-										hold.push(parseInt(item.toString()[0]));
-										hold.push(parseInt(item.toString()[1]));
-								}
-						} else {
-								console.log("failed number check: " + item);
-						}
-				});
-				love(hold);
-		} else {
-				document.getElementById('result').textContent = array[0] + "" + array[1] + "%";
-				result = array[0] + "" + array[1] + "%";
-				return result;
+  
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <title>HTML5 Web Terminal</title>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata"
+          rel="stylesheet" type="text/css" />
+	<style>
+		::selection {
+		  background: #FF5E99;
 		}
-}
-
-function calculate() {
-		var inputs = document.getElementsByName('names'),
-				loves = ["l", "o", "v", "e", "s"],
-				countArray = [],
-				count,
-				names,
-				jointNames;
-		document.getElementById('warning').textContent = "";
-		if (!inputs[0].value || !inputs[1].value) {
-				document.getElementById('warning').textContent = "Please enter both names.";
-		} else {
-				names = "" + inputs[0].value + "" + inputs[1].value + "";
-				jointNames = names.toLowerCase();
-				countArray = loves.map(function(item) {
-						count = 0;
-						for (var i = 0; i < jointNames.length; i += 1) {
-								if (item === jointNames[i]) {
-										count += 1;
-								}
-						}
-						return count;
-				});
-				love(countArray);
+		html, body {
+		  width: 100%;
+		  height: 100%;
+		  margin: 0;
 		}
-}
+		body {
+		  font-size: 11pt;
+		  font-family: Inconsolata, monospace;
+		  color: white;
+		  background-color: black;
+		}
+		#container {
+		  padding: .1em 1.5em 1em 1em;
+		}
+		#container output {
+		  clear: both;
+		  width: 100%;
+		}
+		#container output h3 {
+		  margin: 0;
+		}
+		#container output pre {
+		  margin: 0;
+		}
+		.input-line {
+		  display: -webkit-box;
+		  -webkit-box-orient: horizontal;
+		  -webkit-box-align: stretch;
+		  display: -moz-box;
+		  -moz-box-orient: horizontal;
+		  -moz-box-align: stretch;
+		  display: box;
+		  box-orient: horizontal;
+		  box-align: stretch;
+		  clear: both;
+		}
+		.input-line > div:nth-child(2) {
+		  -webkit-box-flex: 1;
+		  -moz-box-flex: 1;
+		  box-flex: 1;
+		}
+		.prompt {
+		  white-space: nowrap;
+		  color: #96b38a;
+		  margin-right: 7px;
+		  display: -webkit-box;
+		  -webkit-box-pack: center;
+		  -webkit-box-orient: vertical;
+		  display: -moz-box;
+		  -moz-box-pack: center;
+		  -moz-box-orient: vertical;
+		  display: box;
+		  box-pack: center;
+		  box-orient: vertical;
+		  -webkit-user-select: none;
+		  -moz-user-select: none;
+		  user-select: none;
+		}
+		.cmdline {
+		  outline: none;
+		  background-color: transparent;
+		  margin: 0;
+		  width: 100%;
+		  font: inherit;
+		  border: none;
+		  color: inherit;
+		}
+		.ls-files {
+		  height: 45px;
+		  -webkit-column-width: 100px;
+		  -moz-column-width: 100px;
+		  -o-column-width: 100px;
+		  column-width: 100px;
+		}
 
-document.getElementById('submit').addEventListener('click', function(e) {
-		e.preventDefault();
-		calculate();
-}, false);
-</Script>
-<div class="container">
-	<div class=" clearfix">
-		<div class="calc col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-				<h2>Love Calculator</h2>
-				<h5>Input two peoples names to calculate the love....</h5>
-				<form role="form" class="form-horizontal">
-						<div class="form-group">
-								<input type="text" class="form-control" name="names" placeholder="Name One" />
-						</div>
-						<div class="form-group">
-								<input type="text" class="form-control" name="names" placeholder="Name Two" />
-						</div>
-						<div class="form-group">
-								<button class="btn btn-danger pull-right" type="submit" id="submit">Calculate</button>
-						</div>
-				</form>
-				<p id="warning" class="text-danger"></p>
-				<h1 id="result" class="text-center"></h1>
-		</div>
-	</div>
-</div>
 
-</Html>
+		/************************************************************/
+		/* SVG Clock                                                */
+		/************************************************************/
+
+		.clock-container {
+		  display: none /*inline-block*/;
+		  position: relative;
+		  width: 200px;
+		  vertical-align: middle;
+		  overflow: hidden;
+		} 
+
+		.clock-container > svg > circle {
+		  stroke-width: 2px;
+		  stroke: #fff;
+		}
+
+		.hour, .min, .sec { 
+		  stroke-width: 1px;
+		  fill: #333;
+		  stroke: #555;
+		}
+
+		.sec {
+		   stroke: #f55;
+		}
+	</style>
+  </head>
+  <body>
+    <div id="container">
+      <output></output>
+      <div id="input-line" class="input-line">
+        <div class="prompt"></div><div><input class="cmdline" autofocus /></div>
+      </div>
+    </div>
+    
+    <!--<script src="http://www.codehelper.io/api/ips/?js"></script>-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://s.codepen.io/AndrewBarfield/pen/LEbPJx.js"></script>
+    
+    <div class="clock-container">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45"/>
+        <g>
+          <rect class="hour" x="47.5" y="12.5" width="5" height="40" rx="2.5" ry="2.55" />
+          <rect class="min" x="48.5" y="12.5" width="3" height="40" rx="2" ry="2"/>
+          <line class="sec" x1="50" y1="50" x2="50" y2="16" />
+        </g>
+      </svg>
+    </div>
+    <script>
+		$(function() {
+		  
+		  // Set the command-line prompt to include the user's IP Address
+		  //$('.prompt').html('[' + codehelper_ip["IP"] + '@HTML5] # ');
+			$('.prompt').html('[user@HTML5] # ');
+
+		  // Initialize a new terminal object
+		  var term = new Terminal('#input-line .cmdline', '#container output');
+		  term.init();
+		  
+		  // Update the clock every second
+		  setInterval(function() {
+			function r(cls, deg) {
+			  $('.' + cls).attr('transform', 'rotate('+ deg +' 50 50)')
+			}
+			var d = new Date()
+			r("sec", 6*d.getSeconds())  
+			r("min", 6*d.getMinutes())
+			r("hour", 30*(d.getHours()%12) + d.getMinutes()/2)
+		  }, 1000);
+		  
+		});
+	</script>
+  </body>
+</html>
